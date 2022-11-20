@@ -16,11 +16,17 @@ namespace CalenadrSynchronizerMVC.Controllers
             this.signInManager = signInManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl = null)
+        {
+            LoginViewModel loginViewModel = new LoginViewModel();
+            loginViewModel.ReturnUrl = returnUrl ?? Url.Content("~/");
+            return View(loginViewModel);
+        }
+
+        public IActionResult Login()
         {
             return View();
         }
-
         public async Task<IActionResult> Register(string? returnUrl = null)
         {
             RegisterViewModel registerViewModel = new RegisterViewModel();
